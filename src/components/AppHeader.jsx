@@ -5,7 +5,7 @@ export default function AppHeader() {
         <header className="bg-light py-3 px-4 shadow">
             <nav>
                 <NavLink to="/" className="text-decoration-none">
-                    <strong>movie</strong>
+                    <strong>Home</strong>
                 </NavLink>
             </nav>
         </header>

@@ -1,4 +1,4 @@
-export default function AppHeader() {
+export default function AppFooter() {
     return (
         <></>
     )
