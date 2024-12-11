@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom"
-
+import Banner from "../components/Banner";
 useParams
 export default function SingleMoviePage() {
     const { id } = useParams()
 
     return (
-        <h1>Single Movie id: {id}</h1>
+        <Banner title="movie" subtitle="common films" />
     )
 }
