@@ -11,6 +11,7 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<MoviesPage />} />
             <Route path="movies/:id" element={<SingleMoviePage />} />
+            {/*<Route path="movies/:id" element={<SingleMoviePage />} />*/}
           </Route>
         </Routes>
       </BrowserRouter>
