@@ -1,8 +1,12 @@
+import { useState, useEffect } from "react";
 import Banner from "../components/Banner";
 import MovieCard from "../components/MovieCard";
 
+
 export default function MoviesPage() {
-    const movies = [
+    const { movies, setMovies } = useState([])
+    /*const movies = [
+
         {
             "id": 1,
             "title": "Inception",
@@ -53,7 +57,20 @@ export default function MoviesPage() {
             "created_at": "2024-11-29 11:40:13",
             "updated_at": "2024-11-29 11:40:13"
         }
-    ]
+    ]*/
+    useEffect(() => {
+        fetch(`http://localhost:5173/api/movies`)
+            .then((res) => res.json())
+            .then(({ response }) => {
+                console.log(response.data);
+                setMovies(response.data)
+
+            })
+    },
+        [])
+
+
+
     return (
         <>
             <Banner title="movie" subtitle="common films" />
@@ -73,7 +90,6 @@ export default function MoviesPage() {
 
                     </div>
                 </div>
-
             </section>
         </>
     )
