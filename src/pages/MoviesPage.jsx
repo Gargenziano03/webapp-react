@@ -61,9 +61,9 @@ export default function MoviesPage() {
     useEffect(() => {
         fetch(`http://localhost:5173/api/movies`)
             .then((res) => res.json())
-            .then(({ response }) => {
-                console.log(response.data);
-                setMovies(response.data)
+            .then((data) => {
+                console.log(data);
+                setMovies(data)
 
             })
     },
@@ -80,7 +80,7 @@ export default function MoviesPage() {
 
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
                         {
-                            movies.map(movie => (
+                            movies.data.map(movie => (
                                 <div className="col" key={movie.id}>
                                     <MovieCard movie={movie} />
                                 </div>
