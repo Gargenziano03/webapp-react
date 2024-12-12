@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import Banner from "../components/Banner";
 import ReviewCard from "../components/ReviewCard";
 useParams
@@ -8,7 +8,6 @@ export default function SingleMoviePage() {
     const reviews = [
         {
             id: 1,
-            movie_id: 1,
             name: 'Alice',
             vote: 5,
             text: 'A mind-bending masterpiece.',
@@ -17,7 +16,6 @@ export default function SingleMoviePage() {
         },
         {
             id: 2,
-            movie_id: 3,
             name: 'Bob',
             vote: 4,
             text: 'Great visuals and a compelling story.',
@@ -26,7 +24,6 @@ export default function SingleMoviePage() {
         },
         {
             id: 3,
-            movie_id: 4,
             name: 'Charlie',
             vote: 3,
             text: 'Confusing at times, but worth watching.',
