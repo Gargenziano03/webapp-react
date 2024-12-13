@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Banner from "../components/Banner";
 import ReviewCard from "../components/ReviewCard";
+import ReviewFormCard from "../components/ReviewFormCard";
 useParams
 export default function SingleMoviePage() {
     const { id } = useParams()
@@ -54,6 +55,8 @@ export default function SingleMoviePage() {
             <section className="reviews">
                 <div className="container">
                     {movie && movie?.reviews.map((review) => <ReviewCard key={review.id} review={review} />)}
+
+                    <ReviewFormCard />
                 </div>
             </section>
         </>
