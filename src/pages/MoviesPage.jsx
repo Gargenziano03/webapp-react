@@ -6,7 +6,7 @@ export default function MoviesPage() {
 
     const base_movies_api_url = 'http://localhost:3000/api/movies '
 
-    const { movies, setMovies } = useState([])
+    const [movies, setMovies] = useState([])
 
     useEffect(() => {
         fetch(base_movies_api_url)
