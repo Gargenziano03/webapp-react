@@ -1,10 +1,25 @@
-import { useState, useEffect } from "react";
 import Banner from "../components/Banner";
 import MovieCard from "../components/MovieCard";
-
+import { useEffect, useState } from "react";
 
 export default function MoviesPage() {
+
+    const base_movies_api_url = 'http://localhost:3000/api/movies '
+
     const { movies, setMovies } = useState([])
+
+    useEffect(() => {
+        fetch(base_movies_api_url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+                setMovies(data.movies)
+                console.log(movies);
+
+
+            }).catch(err => console.error(err))
+    }, [])
     /*const movies = [
 
         {
@@ -58,16 +73,6 @@ export default function MoviesPage() {
             "updated_at": "2024-11-29 11:40:13"
         }
     ]*/
-    useEffect(() => {
-        fetch(`http://localhost:5173/api/movies`)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setMovies(data)
-
-            })
-    },
-        [])
 
 
 
@@ -76,20 +81,19 @@ export default function MoviesPage() {
             <Banner title="movie" subtitle="common films" />
 
             <section className="py-5">
+
                 <div className="container">
 
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-                        {
-                            movies.data.map(movie => (
-                                <div className="col" key={movie.id}>
-                                    <MovieCard movie={movie} />
-                                </div>
-                            ))
+                        {movies.map(movie => (
+                            <div className="col" key={movie.id}>
+                                <MovieCard movie={movie} />
+                            </div>
+                        ))
                         }
-
-
                     </div>
                 </div>
+
             </section>
         </>
     )

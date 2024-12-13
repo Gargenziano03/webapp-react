@@ -9,13 +9,17 @@ function App() {
   return (
     <>
       <BrowserRouter>
+
         <Routes>
+
           <Route element={<AppLayout />}>
             <Route index element={<MoviesPage />} />
             <Route path="movies/:id" element={<SingleMoviePage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+
         </Routes>
+
       </BrowserRouter>
     </>
   )
