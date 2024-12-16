@@ -1,5 +1,6 @@
 import { useState } from "react"
 export default function textFormCard({ movie_id }) {
+
     const [name, setName] = useState('')
     const [text, setText] = useState('')
     const [rating, setRating] = useState(0)

@@ -60,7 +60,7 @@ export default function SingleMoviePage() {
                 <div className="container">
                     {movie && movie?.reviews.map((review) => <ReviewCard key={review.id} review={review} />)}
 
-                    <ReviewFormCard />
+                    <ReviewFormCard movie_id={id} />
                 </div>
             </section>
         </>
