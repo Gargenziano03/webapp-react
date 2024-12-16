@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { SplitVendorChunkCache } from "vite"
 export default function ReviewFormCard() {
 
     const [username, setUsername] = useState('')
@@ -19,7 +18,17 @@ export default function ReviewFormCard() {
 
 
         const base_movie_api_url = `http://localhost:3000/api/movies/${movie_id}/review`
-        console.log(base_movie_api_url);
+        fetch(base_movie_api_url, {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+            }).catch(err => console.log(err));
 
     }
     function HandleFormSubmit(e) {
