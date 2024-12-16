@@ -18,6 +18,7 @@ export default function ReviewFormCard() {
                         <div className="mb-3">
                             <textarea name="review" id="review" className="form-control" placeholder="review" value={review} onChange={(e) => setReview(e.target.value)}></textarea>
                         </div>
+                        <button type="submit" className="btn btn-primary">invio</button>
                     </form>
                 </div>
             </div>
