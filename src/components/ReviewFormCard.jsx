@@ -1,8 +1,8 @@
 import { useState } from "react"
-export default function ReviewFormCard() {
+export default function textFormCard() {
 
-    const [username, setUsername] = useState('')
-    const [review, setReview] = useState('')
+    const [name, setName] = useState('')
+    const [text, setText] = useState('')
     const [rating, setRating] = useState(0)
 
 
@@ -10,14 +10,14 @@ export default function ReviewFormCard() {
         e.preventDefault()
 
         const formData = {
-            username,
-            review,
+            name,
+            text,
             vote: rating
         }
         console.log(formData);
 
 
-        const base_movie_api_url = `http://localhost:3000/api/movies/${movie_id}/review`
+        const base_movie_api_url = `http://localhost:3000/api/movies/${movie_id}/reviews`
         fetch(base_movie_api_url, {
             method: 'POST',
             body: JSON.stringify(formData),
@@ -40,7 +40,7 @@ export default function ReviewFormCard() {
                 <div className="card-body">
                     <form onSubmit={HandleFormSubmit}>
                         <div className="mb-3">
-                            <input name="username" type="text" className="form-control" placeholder="username" value={username} onChange={(e) => setUsername(e.target.username)} />
+                            <input name="name" type="text" className="form-control" placeholder="name" value={name} onChange={(e) => setName(e.target.name)} />
                         </div>
 
                         <div className="rating mb-3 text-warning">
@@ -48,7 +48,7 @@ export default function ReviewFormCard() {
                         </div>
 
                         <div className="mb-3">
-                            <textarea name="review" id="review" className="form-control" placeholder="review" value={review} onChange={(e) => setReview(e.target.value)}></textarea>
+                            <textarea name="text" id="text" className="form-control" placeholder="text" value={text} onChange={(e) => setText(e.target.value)}></textarea>
                         </div>
                         <button type="submit" className="btn btn-primary">invio</button>
                     </form>
