@@ -6,9 +6,11 @@ export default function textFormCard({ movie_id }) {
     const [rating, setRating] = useState(0)
     const [errorMessage, setErrorMessage] = useState(null)
 
+    // Funzione che viene chiamata quando il form viene inviato
     function HandleFormSubmit(e) {
         e.preventDefault()
 
+        // Validazione dei dati: controlla che nome, testo e voto siano validi
         if (name.length < 2 || text.length < 5 || rating == 0) {
             setErrorMessage('Please fill all fileds in the form')
 
@@ -21,8 +23,9 @@ export default function textFormCard({ movie_id }) {
             }
             console.log(formData);
 
-
+            // URL dell'API
             const base_movie_api_url = `http://localhost:3000/api/movies/${movie_id}/review`
+            // Invia i dati al server tramite una richiesta POST
             fetch(base_movie_api_url, {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -44,7 +47,9 @@ export default function textFormCard({ movie_id }) {
         <div className="container">
             <div className="card">
                 <div className="card-body">
+
                     <form onSubmit={HandleFormSubmit}>
+
                         <div className="mb-3">
                             <input name="name" type="text" className="form-control" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
                         </div>

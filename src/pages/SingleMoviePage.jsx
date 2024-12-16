@@ -5,10 +5,14 @@ import ReviewCard from "../components/ReviewCard";
 import ReviewFormCard from "../components/ReviewFormCard";
 useParams
 export default function SingleMoviePage() {
+    // Recupera il parametro 'id' dalla URL tramite useParams
     const { id } = useParams()
+
+    // Costruisce l'URL dell'API per ottenere i dettagli del film specifico
     const base_movie_api_url = `http://localhost:3000/api/movies/${id}`
     const [movie, setMovie] = useState(null)
 
+    // useEffect per caricare i dettagli del film 
     useEffect(() => {
         fetch(base_movie_api_url)
             .then(res => res.json())

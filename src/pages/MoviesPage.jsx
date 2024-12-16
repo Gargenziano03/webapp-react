@@ -1,14 +1,16 @@
+// Importa i componenti necessari
 import Banner from "../components/Banner";
 import MovieCard from "../components/MovieCard";
 import { useEffect, useState } from "react";
 
 export default function MoviesPage() {
-
+    // URL dell'API
     const base_movies_api_url = 'http://localhost:3000/api/movies '
 
     const [movies, setMovies] = useState([])
-
+    // useEffect per caricare i dati dei film
     useEffect(() => {
+        // Effettua una richiesta HTTP GET per ottenere i dati dei film
         fetch(base_movies_api_url)
             .then(res => res.json())
             .then(data => {
