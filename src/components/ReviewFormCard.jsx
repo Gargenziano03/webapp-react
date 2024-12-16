@@ -12,7 +12,12 @@ export default function ReviewFormCard() {
             <div className="card">
                 <div className="card-body">
                     <form onSubmit={HandleFormSubmit}>
-                        <inprt name="username" type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.username)} />
+                        <div className="mb-3">
+                            <input name="username" type="text" className="form-control" placeholder="username" value={username} onChange={(e) => setUsername(e.target.username)} />
+                        </div>
+                        <div className="mb-3">
+                            <textarea name="review" id="review" className="form-control" placeholder="review" value={review} onChange={(e) => setReview(e.target.value)}></textarea>
+                        </div>
                     </form>
                 </div>
             </div>
