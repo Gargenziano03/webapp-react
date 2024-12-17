@@ -1,11 +1,11 @@
 import { useState } from "react"
-export default function textFormCard({ movie_id }) {
+export default function textFormCard({ movie_id, success, handleSuccess }) {
 
     const [name, setName] = useState('')
     const [text, setText] = useState('')
     const [rating, setRating] = useState(0)
     const [errorMessage, setErrorMessage] = useState(null)
-    const [success, setSuccess] = useState(null)
+
 
     function HandleFormToggle() {
         document.getElementById('form-card').classList.toggle('d-none')
@@ -42,18 +42,23 @@ export default function textFormCard({ movie_id }) {
                 .then(data => {
                     console.log(data);
                     if (data.success) {
-                        setSuccess(true)
+                        handleSuccess('Thanks for your review')
 
-                        setName('')
-                        setText('')
+
+
+                        setUsername('')
+                        setReview('')
                         setRating(0)
-                        setErrorMessage(null)
+
+                        setTimeout(HandleFormToggle, 1000)
+
+
+                        setTimeout(() => handleSuccess(null), 3000)
                     }
                 })
-                .catch(err => console.log(err
-
-                ));
+                .catch(err => console.log(err));
         }
+
 
 
     }

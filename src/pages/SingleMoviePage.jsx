@@ -10,7 +10,9 @@ export default function SingleMoviePage() {
 
     // Costruisce l'URL dell'API per ottenere i dettagli del film specifico
     const base_movie_api_url = `http://localhost:3000/api/movies/${id}`
+
     const [movie, setMovie] = useState(null)
+    const [success, setSuccess] = useState(null)
 
     // useEffect per caricare i dettagli del film 
     useEffect(() => {
@@ -24,7 +26,7 @@ export default function SingleMoviePage() {
 
 
             }).catch(err => console.error(err))
-    }, [])
+    }, [success])
     /* const reviews = [
          {
              id: 1,
@@ -60,7 +62,7 @@ export default function SingleMoviePage() {
                 <div className="container">
                     {movie && movie?.reviews.map((review) => <ReviewCard key={review.id} review={review} />)}
 
-                    <ReviewFormCard movie_id={id} />
+                    <ReviewFormCard movie_id={id} success={success} handleSuccess={setSuccess} />
                 </div>
             </section>
         </>
