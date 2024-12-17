@@ -1,15 +1,21 @@
 // Importa i componenti necessari
 import Banner from "../components/Banner";
 import MovieCard from "../components/MovieCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import GlobalContext from "../contexts/GlobalContexts";
+import Loader from "../components/Loader";
 
 export default function MoviesPage() {
+
+    const { loading, setLoading } = useContext(GlobalContext)
+
     // URL dell'API
     const base_movies_api_url = 'http://localhost:3000/api/movies '
 
     const [movies, setMovies] = useState([])
     // useEffect per caricare i dati dei film
     useEffect(() => {
+        setLoading(true);
         // Effettua una richiesta HTTP GET per ottenere i dati dei film
         fetch(base_movies_api_url)
             .then(res => res.json())
@@ -18,6 +24,7 @@ export default function MoviesPage() {
 
                 setMovies(data.movies)
                 console.log(movies);
+                setLoading(false)
 
 
             }).catch(err => console.error(err))
@@ -80,23 +87,27 @@ export default function MoviesPage() {
 
     return (
         <>
-            <Banner title="movie" subtitle="common films" />
+            {loading ? <Loader /> : (
+                <>
+                    <Banner title="movie" subtitle="common films" />
 
-            <section className="py-5">
+                    <section className="py-5">
 
-                <div className="container">
+                        <div className="container">
 
-                    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-                        {movies.map(movie => (
-                            <div className="col" key={movie.id}>
-                                <MovieCard movie={movie} />
+                            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+                                {movies.map(movie => (
+                                    <div className="col" key={movie.id}>
+                                        <MovieCard movie={movie} />
+                                    </div>
+                                ))
+                                }
                             </div>
-                        ))
-                        }
-                    </div>
-                </div>
+                        </div>
 
-            </section>
+                    </section>
+                </>
+            )}
         </>
     )
 }

@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Banner from "../components/Banner";
 import ReviewCard from "../components/ReviewCard";
 import ReviewFormCard from "../components/ReviewFormCard";
+import GlobalContext from "../contexts/GlobalContexts";
+import Loader from "../components/Loader";
 useParams
 export default function SingleMoviePage() {
     // Recupera il parametro 'id' dalla URL tramite useParams
     const { id } = useParams()
+
+    const { loading, setLoading } = useContext(GlobalContext)
 
     // Costruisce l'URL dell'API per ottenere i dettagli del film specifico
     const base_movie_api_url = `http://localhost:3000/api/movies/${id}`
@@ -16,6 +20,8 @@ export default function SingleMoviePage() {
 
     // useEffect per caricare i dettagli del film 
     useEffect(() => {
+        setLoading(true);
+
         fetch(base_movie_api_url)
             .then(res => res.json())
             .then(data => {
@@ -23,6 +29,7 @@ export default function SingleMoviePage() {
 
                 setMovie(data)
                 console.log(movie);
+                setLoading(false)
 
 
             }).catch(err => console.error(err))
@@ -56,15 +63,20 @@ export default function SingleMoviePage() {
 
     return (
         <>
-            <Banner title={movie?.title} subtitle={movie?.director} />
 
-            <section className="reviews">
-                <div className="container">
-                    {movie && movie?.reviews.map((review) => <ReviewCard key={review.id} review={review} />)}
+            {loading ? <Loader /> : (
+                <>
+                    <Banner title={movie?.title} subtitle={movie?.director} />
 
-                    <ReviewFormCard movie_id={id} success={success} handleSuccess={setSuccess} />
-                </div>
-            </section>
+                    <section className="reviews">
+                        <div className="container">
+                            {movie && movie?.reviews.map((review) => <ReviewCard key={review.id} review={review} />)}
+
+                            <ReviewFormCard movie_id={id} success={success} handleSuccess={setSuccess} />
+                        </div>
+                    </section>
+                </>)}
+
         </>
 
     )
