@@ -5,13 +5,18 @@ export default function textFormCard({ movie_id }) {
     const [text, setText] = useState('')
     const [rating, setRating] = useState(0)
     const [errorMessage, setErrorMessage] = useState(null)
+    const [success, setSuccess] = useState(null)
+
+    function HandleFormToggle() {
+        document.getElementById('form-card').classList.toggle('d-none')
+    }
 
     // Funzione che viene chiamata quando il form viene inviato
     function HandleFormSubmit(e) {
         e.preventDefault()
 
         // Validazione dei dati: controlla che nome, testo e voto siano validi
-        if (name.length < 2 || text.length < 5 || rating == 0) {
+        if (name.length < 5 || text.length < 5 || rating == 0) {
             setErrorMessage('Please fill all fileds in the form')
 
         } else {
@@ -36,21 +41,38 @@ export default function textFormCard({ movie_id }) {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
+                    if (data.success) {
+                        setSuccess(true)
+
+                        setName('')
+                        setText('')
+                        setRating(0)
+                        setErrorMessage(null)
+                    }
                 })
                 .catch(err => console.log(err
 
                 ));
         }
+
+
     }
 
     return (
         <div className="container">
-            <div className="card">
+
+            {success && <div>{success}</div>}
+            <button onClick={HandleFormToggle} className="btn btn-dark mb-2" >Write a review</button>
+
+            <div id="form-card" className="card  mb-4 d-none">
                 <div className="card-body">
+
+                    <h3>Leave your review</h3>
 
                     <form onSubmit={HandleFormSubmit}>
 
                         <div className="mb-3">
+                            <label htmlFor="name">Name</label>
                             <input name="name" type="text" className="form-control" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />
                         </div>
 
@@ -59,6 +81,7 @@ export default function textFormCard({ movie_id }) {
                         </div>
 
                         <div className="mb-3">
+                            <label htmlFor="text">Your review</label>
                             <textarea name="text" id="text" className="form-control" placeholder="text" value={text} onChange={(e) => setText(e.target.value)}></textarea>
                         </div>
 
